@@ -1,5 +1,12 @@
 table {
-  border-collapse: collapse;
+  border-collapse: inherit;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 100px;
 }
 
 td {
@@ -10,10 +17,3 @@ td {
   vertical-align: middle;
 }
 
-.red {
-  background-color: red;
-}
-
-.blue {
-  background-color: blue;
-}
