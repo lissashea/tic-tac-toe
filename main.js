@@ -1,3 +1,4 @@
+
 let table = document.createElement('table');
 
 for (let i = 0; i < 3; i++) {
@@ -10,7 +11,7 @@ for (let i = 0; i < 3; i++) {
       table.append(row);
 }
 
-document.body.append(table);
+document.body.append(table)
 
 let squares = document.querySelectorAll('td');
 let message = document.querySelector('#message');
