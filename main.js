@@ -1,24 +1,139 @@
-let squares = document.querySelectorAll('td');
-let resetButton = document.querySelector('#reset');
-let message = document.querySelector('#message');
-let currentPlayer = 'red';
-
-squares.forEach((square) => {
-  square.addEventListener('click', () => {
-    if (square.getAttribute('data-clicked') !== 'true') {
-      square.setAttribute('data-clicked', 'true');
-      square.classList.add(currentPlayer);
-      currentPlayer = currentPlayer === 'red' ? 'blue' : 'red';
-      message.textContent = `${currentPlayer}'s turn`;
+class Board {
+    constructor() {
+      this.grid = Array.from(Array(3), () => new Array(3));
     }
-  });
-});
 
-resetButton.addEventListener('click', () => {
-  squares.forEach((square) => {
-    square.removeAttribute('data-clicked');
-    square.classList.remove('red', 'blue');
-  });
-  message.textContent = 'Red\'s turn';
-  currentPlayer = 'red';
-});
+    isFull(grid) {
+        return this.grid.reduce(function(flat, subElem) {
+          return flat.concat(Array.isArray(subElem) ? flatten(subElem) : subElem);
+        }, []);
+      }
+}
+
+
+// def empty_positions?
+// indices = (0...@grid.length).to_a
+// positions = indices.product(indices)
+// positions.any? { |pos| empty?(pos) }
+// end
+
+function placeMark() {
+  
+}
+
+function validPos() {
+  
+}
+
+function makeMove() {
+
+}
+ 
+
+function winRow() {
+
+}
+
+function winDiagonal() {
+
+}
+
+function winColumn() {
+
+}
+
+function isEmpty() {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def [](pos)
+    row, col = pos
+    @grid[row][col]
+end
+
+def []=(pos, val)
+    row, col = pos
+    @grid[row][col] = val
+end
+
+def valid?(pos)
+    row, col = pos
+    pos.all? do |i|
+        0 <= i && i < @grid.length
+    end
+end
+
+def empty?(pos)
+    self[pos] == '_'
+end
+
+def place_mark(pos, mark)
+    raise 'invalid mark' if !valid?(pos) || !empty?(pos)
+    self[pos] = mark
+end
+
+def print
+    @grid.each do |row|
+        puts row.join(' ')
+    end
+end
+
+def win_row?(mark)
+    @grid.any? { |row| row.all?(mark) }
+end
+
+def win_col?(mark)
+    @grid.transpose.any? { |col| col.all?(mark) }
+end
+
+def win_diagonal?(mark)
+    left_to_right = (0...@grid.length).all? do |i|
+        pos = [i, i]
+        self[pos] == mark
+    end
+
+    right_to_left = (0...@grid.length).all? do |i|
+        row = i
+        col = @grid.length - 1 - i
+        pos = [row, col]
+        self[pos] == mark
+    end
+
+    left_to_right || right_to_left
+end
+
+def win?(mark)
+    win_row?(mark) || win_col?(mark) || win_diagonal?(mark)
+end
+
+def empty_positions?
+    indices = (0...@grid.length).to_a
+    positions = indices.product(indices)
+    positions.any? { |pos| empty?(pos) }
+end
+end
